@@ -1,0 +1,702 @@
+apiVersion: v1
+items:
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2024-05-01T16:41:16Z"
+    generation: 1
+    labels:
+      app: kafka-ui
+    name: kafka-ui-deployment
+    namespace: default
+    resourceVersion: "49459"
+    selfLink: /apis/apps/v1/namespaces/default/deployments/kafka-ui-deployment
+    uid: 6a71e283-e5c7-4c3b-a7c7-881272bdadcb
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: kafka-ui
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: kafka-ui
+      spec:
+        containers:
+        - env:
+          - name: KAFKA_CLUSTERS_0_NAME
+            value: NewFix
+          - name: KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS
+            value: kafka.default.svc.cluster.local:9092
+          image: provectuslabs/kafka-ui:latest
+          imagePullPolicy: Always
+          name: kafka-ui
+          ports:
+          - containerPort: 8080
+            protocol: TCP
+          resources:
+            limits:
+              cpu: "1"
+              memory: 1Gi
+            requests:
+              cpu: 100m
+              memory: 256Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 1
+    conditions:
+    - lastTransitionTime: "2024-05-01T16:41:19Z"
+      lastUpdateTime: "2024-05-01T16:41:19Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2024-05-01T16:41:16Z"
+      lastUpdateTime: "2024-05-01T16:41:19Z"
+      message: ReplicaSet "kafka-ui-deployment-7c6684b668" has successfully progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:36Z"
+    generation: 1
+    name: inboundgw
+    namespace: default
+    resourceVersion: "49233"
+    selfLink: /apis/apps/v1/namespaces/default/statefulsets/inboundgw
+    uid: a69de724-73c3-46df-8cf4-a4f637a16fad
+  spec:
+    podManagementPolicy: Parallel
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: inboundgw
+    serviceName: inboundgw
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: inboundgw
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - --
+          - /start.sh
+          image: mrefky/inboundgw
+          imagePullPolicy: Always
+          name: inboundgw
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /myfixlogs
+            name: www
+          - mountPath: /myetc
+            name: inboundgw-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: inboundgw-config
+          name: inboundgw-config
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+    volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        creationTimestamp: null
+        name: www
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 30Gi
+        storageClassName: microk8s-hostpath
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+  status:
+    availableReplicas: 1
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: inboundgw-5bcc7974df
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: inboundgw-5bcc7974df
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:49Z"
+    generation: 1
+    name: outboundgw
+    namespace: default
+    resourceVersion: "49294"
+    selfLink: /apis/apps/v1/namespaces/default/statefulsets/outboundgw
+    uid: 3691358a-99f0-493d-ae41-989a790381f5
+  spec:
+    podManagementPolicy: Parallel
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: outboundgw
+    serviceName: outboundgw
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: outboundgw
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - --
+          - /start.sh
+          image: mrefky/outboundgw
+          imagePullPolicy: Always
+          name: outboundgw
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /myfixlogs
+            name: www
+          - mountPath: /myetc
+            name: outboundgw-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: outboundgw-config
+          name: outboundgw-config
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+    volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        creationTimestamp: null
+        name: www
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 30Gi
+        storageClassName: microk8s-hostpath
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+  status:
+    availableReplicas: 1
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: outboundgw-5969fbc75
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: outboundgw-5969fbc75
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:07Z"
+    generation: 1
+    name: dgw3
+    namespace: default
+    resourceVersion: "49373"
+    selfLink: /apis/apps/v1/namespaces/default/statefulsets/dgw3
+    uid: 5d76356e-5836-455a-b5b7-9ea26121621e
+  spec:
+    podManagementPolicy: Parallel
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: dgw3
+    serviceName: dgw3
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: dgw3
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - --
+          - ./start.sh
+          image: mrefky/gw3
+          imagePullPolicy: Always
+          name: dgw3
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /myfixlogs
+            name: www
+          - mountPath: /myetc
+            name: dgw3-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: dgw3-config
+          name: dgw3-config
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+    volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        creationTimestamp: null
+        name: www
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 30Gi
+        storageClassName: microk8s-hostpath
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+  status:
+    availableReplicas: 1
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: dgw3-7b859747bc
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: dgw3-7b859747bc
+    updatedReplicas: 1
+- apiVersion: apps/v1
+  kind: StatefulSet
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:16Z"
+    generation: 1
+    name: dgw2
+    namespace: default
+    resourceVersion: "49467"
+    selfLink: /apis/apps/v1/namespaces/default/statefulsets/dgw2
+    uid: a9a70c92-5843-44d3-8b0d-1471ab3298e5
+  spec:
+    podManagementPolicy: Parallel
+    replicas: 1
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: dgw2
+    serviceName: dgw2
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: dgw2
+      spec:
+        containers:
+        - command:
+          - /bin/bash
+          - -c
+          - --
+          - ./start.sh
+          image: mrefky/gw2
+          imagePullPolicy: Always
+          name: dgw2
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          volumeMounts:
+          - mountPath: /myfixlogs
+            name: www
+          - mountPath: /myetc
+            name: dgw2-config
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+        volumes:
+        - configMap:
+            defaultMode: 420
+            name: dgw2-config
+          name: dgw2-config
+    updateStrategy:
+      rollingUpdate:
+        partition: 0
+      type: RollingUpdate
+    volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        creationTimestamp: null
+        name: www
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 30Gi
+        storageClassName: microk8s-hostpath
+        volumeMode: Filesystem
+      status:
+        phase: Pending
+  status:
+    availableReplicas: 1
+    collisionCount: 0
+    currentReplicas: 1
+    currentRevision: dgw2-8669d979
+    observedGeneration: 1
+    readyReplicas: 1
+    replicas: 1
+    updateRevision: dgw2-8669d979
+    updatedReplicas: 1
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:36Z"
+    labels:
+      app: inboundgw
+    name: inboundgw
+    namespace: default
+    resourceVersion: "49181"
+    selfLink: /api/v1/namespaces/default/services/inboundgw
+    uid: e5d747ae-49cb-4934-9586-9576c100a973
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: inboundgw
+      port: 5001
+      protocol: TCP
+      targetPort: 5001
+    selector:
+      app: inboundgw
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:36Z"
+    labels:
+      app: inboundgw
+    name: inboundgw-ext
+    namespace: default
+    resourceVersion: "49183"
+    selfLink: /api/v1/namespaces/default/services/inboundgw-ext
+    uid: 777018d1-8535-4430-993e-272813b6ac7e
+  spec:
+    allocateLoadBalancerNodePorts: true
+    clusterIP: 10.152.183.7
+    clusterIPs:
+    - 10.152.183.7
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    loadBalancerIP: 192.168.169.62
+    ports:
+    - nodePort: 30066
+      port: 5001
+      protocol: TCP
+      targetPort: 5001
+    selector:
+      app: inboundgw
+    sessionAffinity: None
+    type: LoadBalancer
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 192.168.169.62
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:49Z"
+    labels:
+      app: outboundgw
+    name: outboundgw
+    namespace: default
+    resourceVersion: "49252"
+    selfLink: /api/v1/namespaces/default/services/outboundgw
+    uid: e31f50b8-cf7f-47d7-b57f-cfc8f1c05f78
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: outboundgw
+      port: 4001
+      protocol: TCP
+      targetPort: 4001
+    selector:
+      app: outboundgw
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:07Z"
+    labels:
+      app: dgw3
+    name: dgw3
+    namespace: default
+    resourceVersion: "49327"
+    selfLink: /api/v1/namespaces/default/services/dgw3
+    uid: 4289a112-9a3a-453b-b6d5-406466f5747c
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: dgw3
+      port: 31001
+      protocol: TCP
+      targetPort: 31001
+    selector:
+      app: dgw3
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:16Z"
+    labels:
+      app: dgw2
+    name: dgw2
+    namespace: default
+    resourceVersion: "49384"
+    selfLink: /api/v1/namespaces/default/services/dgw2
+    uid: 3b1a7481-dc49-43db-a49f-ce1d79fea238
+  spec:
+    clusterIP: None
+    clusterIPs:
+    - None
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: dgw2
+      port: 31001
+      protocol: TCP
+      targetPort: 31001
+    selector:
+      app: dgw2
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:16Z"
+    labels:
+      app: dgw2
+    name: dgw2-ext
+    namespace: default
+    resourceVersion: "49389"
+    selfLink: /api/v1/namespaces/default/services/dgw2-ext
+    uid: d68471fe-b57d-4065-8291-75802567dcf0
+  spec:
+    allocateLoadBalancerNodePorts: true
+    clusterIP: 10.152.183.236
+    clusterIPs:
+    - 10.152.183.236
+    externalTrafficPolicy: Cluster
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    loadBalancerIP: 192.168.169.52
+    ports:
+    - nodePort: 32659
+      port: 31001
+      protocol: TCP
+      targetPort: 31001
+    selector:
+      app: dgw2
+    sessionAffinity: None
+    type: LoadBalancer
+  status:
+    loadBalancer:
+      ingress:
+      - ip: 192.168.169.52
+- apiVersion: v1
+  data:
+    executor.cfg: |+
+      [DEFAULT]
+      SenderCompID=CASE
+      ResetOnLogon=Y
+      FileLogPath=./logs
+      #/myfixlogs
+      CheckLatency=N
+
+      [SESSION]
+      BeginString=FIX.4.4
+      SocketAcceptPort=5001
+      TargetCompID=01001
+      SenderCompID=CASE
+
+
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:29Z"
+    name: inboundgw-config
+    namespace: default
+    resourceVersion: "49161"
+    selfLink: /api/v1/namespaces/default/configmaps/inboundgw-config
+    uid: b0d9521a-712e-481b-ab62-b84efcd077e0
+- apiVersion: v1
+  data:
+    executor.cfg: |
+      [DEFAULT]
+      SenderCompID=CASE2
+      ResetOnLogon=Y
+      FileLogPath=./logs
+      CheckLatency=N
+
+      [SESSION]
+      SocketAcceptPort=4001
+      TargetCompID=01001
+      BeginString=FIX.4.4
+      SocketAcceptPort=4001
+      SenderCompID=CASE2
+      TargetCompID=01001
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-05-01T16:40:42Z"
+    name: outboundgw-config
+    namespace: default
+    resourceVersion: "49238"
+    selfLink: /api/v1/namespaces/default/configmaps/outboundgw-config
+    uid: b8439d83-db11-492c-9700-3ed926eb16ab
+- apiVersion: v1
+  data:
+    server.cfg: |+
+      [DEFAULT]
+      HeartBtInt=30
+      ResetOnLogon=Y
+      FileLogPath=./myfixlogs
+      CheckLatency=N
+      ResetOnLogon=Y
+      [SESSION]
+      BeginString=FIX.4.4
+      SocketConnectHost=192.168.169.7
+      SocketConnectPort=3001
+      SenderCompID=01001
+      TargetCompID=CASE
+      ResetOnLogon=Y
+      ResetOnLogout=Y
+      [SESSION]
+      BeginString=FIX.4.4
+      SocketConnectHost=outboundgw.default.svc.cluster.local
+      SocketConnectPort=4001
+      TargetCompID=CASE2
+      SenderCompID=01001
+      ResetOnLogon=Y
+
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:00Z"
+    name: dgw3-config
+    namespace: default
+    resourceVersion: "49312"
+    selfLink: /api/v1/namespaces/default/configmaps/dgw3-config
+    uid: 2f1d02d8-45c7-4349-bfa5-4d7dd3af5830
+- apiVersion: v1
+  data:
+    server.cfg: |
+      [DEFAULT]
+      SenderCompID=CASE2
+      ResetOnLogon=Y
+      FileLogPath=./logs
+      FileStorePath=./Sessions/
+      CheckLatency=N
+      [SESSION]
+      SocketAcceptPort=31001
+      TargetCompID=01001
+      BeginString=FIX.4.4
+      DataDictionary=./FIX44.xml
+      UseDataDictionary=Y
+      ValidateFieldsOutOfOrder=N
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: "2024-05-01T16:41:09Z"
+    name: dgw2-config
+    namespace: default
+    resourceVersion: "49354"
+    selfLink: /api/v1/namespaces/default/configmaps/dgw2-config
+    uid: 676e1ca6-3e25-49d1-8a0b-a37d8bcf002d
+kind: List
+metadata:
+  resourceVersion: ""
