@@ -21,6 +21,9 @@ This repository will install the following gateways
 
 # To install do the following steps
 
+* sudo apt update && sudo apt upgrade -y
+* apt install git -y
+* apt install curl -y
 * git clone https://github.com/mrefky/fixsplitter.git
 * cd fixsplitter
 
