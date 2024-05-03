@@ -53,6 +53,10 @@ Continue with the following steps:
 
 ![Arch](./img2.jpg?raw=true "Arch")
 
+# Services
+
+![Arch](./svc.jpg?raw=true "Arch")
+
 # Test applications
 
 We will publish two c# test applications
