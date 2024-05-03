@@ -1,6 +1,6 @@
 # FixSplitter
 
-![Alt text](./img.jpg?raw=true "Title")
+![Arch](./img.jpg?raw=true "Arch")
 
 The client will have to build two fix client applications : 
 * The first “Client first FIX connection” will send application massages to the excahnge and will not receive any replies (except if the message is a malformed fix messages and in that case the client will receive a reject message). 
