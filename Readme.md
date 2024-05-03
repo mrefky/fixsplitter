@@ -57,6 +57,6 @@ Continue with the following steps:
 
 # We will publish two c# test applications
 
-* Fixman
-* client-2
+* Fixman https://github.com/mrefky/Fixman.git
+* client-2 https://github.com/mrefky/client-2.git 
 
