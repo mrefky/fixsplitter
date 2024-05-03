@@ -52,3 +52,11 @@ Continue with the following steps:
 # Pods
 
 ![Arch](./img2.jpg?raw=true "Arch")
+
+# Test applications
+
+# We will publish two c# test applications
+
+* Fixman
+* client-2
+
