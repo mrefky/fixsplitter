@@ -40,7 +40,7 @@ Continue with the following steps:
 * ./Scripts/install_docker.sh
 * ./Scripts/install_k9s.sh
 * ./build.sh
-* k9s
+
 # Deployments
 
 ![Arch](./deploy.jpg?raw=true "Arch")
