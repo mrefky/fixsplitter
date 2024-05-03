@@ -75,7 +75,7 @@ We will publish two c# test applications
 
 # Client second connection
 
-IP=192.168.169.52
+* IP=192.168.169.52
 * Port=31001
 * TargetCompID=CASE2
 * SenderCompID=01001
