@@ -23,7 +23,9 @@ This repository will install the following gateways
 
 * git clone https://github.com/mrefky/fixsplitter.git
 * cd fixsplitter
+
 Edit the file named default.yaml
+
 * replaciing 192.168.169.7 with the echange fix server IP.
 * replacing 192.168.169.62 with an IP in your nework subnet that the client first connection will connect to.
 * replacing 192.168.169.52 with an IP in your nework subnet that the client second connection will connect to.
