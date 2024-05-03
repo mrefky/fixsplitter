@@ -40,9 +40,14 @@ Continue with the following steps:
 * chmod a+x *.sh
 * chmod a+x  ./Scripts/*.sh
 * ./re_install.sh
+
 * ./Scripts/install_docker.sh
 * ./Scripts/install_k9s.sh
+* ./Scripts/get_helm.sh
+* ./Scripts/repo.sh
+* ./ini.sh
 * ./build.sh
+
 
 # Deployments
 
