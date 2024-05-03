@@ -4,3 +4,4 @@ To install do the following steps
 3. chmod a+x *.sh
 4. chmod a+x */*.sh
 5. ./build.sh
+6. k9s
