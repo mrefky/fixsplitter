@@ -700,3 +700,35 @@ items:
 kind: List
 metadata:
   resourceVersion: ""
+---    
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2024-05-03T04:02:04Z"
+  name: kafka-ui-service
+  namespace: default
+  resourceVersion: "3965"
+  uid: afae1c90-bffd-4c01-9ed4-fd21a9153932
+spec:
+  allocateLoadBalancerNodePorts: true
+  clusterIP: 10.152.183.212
+  clusterIPs:
+  - 10.152.183.212
+  externalTrafficPolicy: Cluster
+  internalTrafficPolicy: Cluster
+  ipFamilies:
+  - IPv4
+  ipFamilyPolicy: SingleStack
+  ports:
+  - nodePort: 31006
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: kafka-ui
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 192.168.169.50
