@@ -11,7 +11,7 @@
 The client will have to build two fix client applications : 
 * The first “Client first FIX connection” will send application massages to the excahnge and will not receive any replies (except if the message is a malformed fix messages and in that case the client will receive a reject message). 
 * The second one “Client second FIX connection” will receive the replies from the exchange.
-# Below are the gateways deployed
+# Exchange side gateways 
 *	“Inbound GW” that will receive application messages from the client and send these messages to Kafka inbound topic.
 *	“DGW3” that will read messages stored in “Kafka” inbound topic in a timely FIFO manner and send it to the exchange Fix gateway and will receive replies and send it to the Outbound GW 
 *	Outbound GW which will stores these messages to the outbound topic.
