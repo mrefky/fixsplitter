@@ -41,5 +41,12 @@ Continue with the following steps:
 * ./Scripts/install_k9s.sh
 * ./build.sh
 * k9s
+# Deployments
+
+![Arch](./deploy.jpg?raw=true "Arch")
+
+# Statefullsets
+
+![Arch](./stats.jpg?raw=true "Arch")
 
 ![Arch](./img2.jpg?raw=true "Arch")
