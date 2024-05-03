@@ -1,6 +1,6 @@
 # FixSplitter
 
-
+![Alt text](./img.jpg?raw=true "Title")
 
 To install do the following steps
 
