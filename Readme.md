@@ -35,7 +35,7 @@ Edit the file named default.yaml
 Continue with the following steps:
 
 * chmod a+x *.sh
-* chmod a+x */*.sh
+* chmod a+x  */*.sh
 * ./re_install.sh
 * ./Scripts/install_docker.sh
 * ./Scripts/install_k9s.sh
