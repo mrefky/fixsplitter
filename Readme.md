@@ -66,7 +66,7 @@ We will publish two c# test applications
 
 # Connection Parameters
 
-# client first connection
+# Client first connection
 
 * IP=192.168.169.62
 * Port=5001
