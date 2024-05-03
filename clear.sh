@@ -1,1 +1,1 @@
-kubectl delete sts,deploy,svc,cm,pvc --all
+microk8s.kubectl delete sts,deploy,svc,cm,pvc --all
