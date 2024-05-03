@@ -47,6 +47,8 @@ Continue with the following steps:
 
 # Statefullsets
 
-![Arch](./stats.jpg?raw=true "Arch")
+![Arch](./stat.jpg?raw=true "Arch")
+
+# Pods
 
 ![Arch](./img2.jpg?raw=true "Arch")
