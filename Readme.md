@@ -64,3 +64,27 @@ We will publish two c# test applications
 * Fixman https://github.com/mrefky/Fixman.git
 * client-2 https://github.com/mrefky/client-2.git 
 
+# Connection Parameters
+
+# client first connection
+
+* IP=192.168.169.62
+* Port=5001
+* TargetCompID=CASE
+* SenderCompID=01001
+
+# Client second connection
+
+IP=192.168.169.52
+* Port=31001
+* TargetCompID=CASE2
+* SenderCompID=01001
+
+# kafka-ui
+
+http://192.168.169.50:8080
+
+
+
+
+
