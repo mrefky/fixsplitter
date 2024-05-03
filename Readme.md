@@ -24,8 +24,8 @@ The client will have to build two fix client applications :
 * Edit the file named default.yaml replaciing 192.168.169.7 with the echange fix server IP.
 * Edit the file named default.yaml replacing 192.168.169.62 with an IP in your nework subnet that the client first connection will connect to.
 * Edit the file named default.yaml replacing 192.168.169.52 with an IP in your nework subnet that the client second connection will connect to.
-* Edit the file named default.yaml replacing 1001 with your firm code.
-* Edit the file named default.yaml replacing 3001 with your exchange fix port.
+* Edit the file named default.yaml replacing 01001 with your firm code.
+* Edit the file named default.yaml replacing 31001 with your exchange fix port.
 * cd fixsplitter
 * chmod a+x *.sh
 * chmod a+x */*.sh
