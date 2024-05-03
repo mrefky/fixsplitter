@@ -36,4 +36,4 @@ This repository will install the following gateways
 * ./build.sh
 * k9s
 
-[Arch](./img2.jpg?raw=true "Arch")
+![Arch](./img2.jpg?raw=true "Arch")
