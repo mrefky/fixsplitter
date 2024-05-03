@@ -1,6 +1,6 @@
 sudo snap remove microk8s --purge
 sudo rm -rf ~/snap/microk8s
-sudo snap install microk8s --classic --channel=1.23/stable
+sudo snap install microk8s --classic --channel=1.29/stable
 microk8s.start
 microk8s.status --wait-ready
 sudo microk8s.enable dns 
