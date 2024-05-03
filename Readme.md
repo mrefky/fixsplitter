@@ -31,6 +31,9 @@ Edit the file named default.yaml
 * replacing 192.168.169.52 with an IP in your nework subnet that the client second connection will connect to.
 * replacing 01001 with your firm code.
 * replacing 31001 with your exchange fix port.
+* edit the file named re_install.sh replacing the below line with valid IP range in your system:
+
+sudo microk8s.enable metallb 192.168.169.50-192.168.169.99 
 
 Continue with the following steps:
 
