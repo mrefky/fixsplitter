@@ -96,11 +96,11 @@ We will publish two c# test applications
 http://192.168.169.50:8080
 
 
-# How to reduce input trafic rate
+# How to reduce traffic rate
 
 * Either use the inboundGW code to reject messages that exceeds acceptable rate (code is implemented however the maximum rate is opened)
 
-* Or deplay messages sent fro GW3 to the exchange by adding an exxeptable delay if needed.
+* Or deplay rate of messages sent from GW3 to the exchange by adding an acceptable delay if needed.
 
 
 
