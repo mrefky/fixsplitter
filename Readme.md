@@ -99,8 +99,9 @@ http://192.168.169.50:8080
 # How to reduce traffic rate
 * You dont need to reduce it since
 
- - The "inbound topic" will not have any issues event if the messages rate is extermely high 
- - Reading messages from the inboundgw and sending these messages to the exchange fix gateway will be limitted by the deplay introduced by the application 
+    - The "inbound topic" will not have any issues event if the messages rate is extermely high 
+    
+    - Reading messages from the inboundgw and sending these messages to the exchange fix gateway will be limitted by the deplay introduced by the application 
 
 
  However if needed you can:
