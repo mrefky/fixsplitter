@@ -97,7 +97,12 @@ http://192.168.169.50:8080
 
 
 # How to reduce traffic rate
+* You dont need to reduce it since
+ - The "inbound topic" will not have any issues event if the messages rate is extermely high 
+ - Reading messages from the inboundgw and sending these messages to the exchange fix gateway will be limitted by the deplay introduced by the application 
 
+ However if needed you can:
+  
  * Either use the “inboundGW” code to reject messages that exceeds acceptable rate (code is implemented however the maximum rate is opened)
  *	Or delay rate of messages sent from GW3 to the exchange by adding an acceptable delays if needed.
 
