@@ -98,9 +98,6 @@ http://192.168.169.50:8080
 
 # How to reduce traffic rate
 
-* Either use the inboundGW code to reject messages that exceeds acceptable rate (code is implemented however the maximum rate is opened)
-
-* Or deplay rate of messages sent from GW3 to the exchange by adding an acceptable delay if needed.
-
-
+ * Either use the “inboundGW” code to reject messages that exceeds acceptable rate (code is implemented however the maximum rate is opened)
+ *	Or delay rate of messages sent from GW3 to the exchange by adding an acceptable delays if needed.
 
