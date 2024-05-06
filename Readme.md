@@ -68,6 +68,11 @@ Continue with the following steps:
 
 ![Arch](./svc.jpg?raw=true "Arch")
 
+# Config Maps
+
+![Arch](./cm.jpg?raw=true "Arch")
+
+
 # Test applications
 
 We will publish two c# test applications
