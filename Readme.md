@@ -4,7 +4,7 @@
 
 # why
 * We need to separate the inbound and outbound streams into two different paths (and probably two different servers in the client side) which will ensure better performance over the same allowed bandwidth.
-* Ensure that messages sent to the exchange fix GW will be sent in an acceptable rate.
+* Ensure that messages sent to the exchange fix GW will be sent in an acceptable rate {and can be further reduced if needed as explained below}.
 
 # How
 
