@@ -29,12 +29,12 @@ This repository will install the following gateways
 
 Edit the file named default.yaml
 
-* replaciing 192.168.169.7 with the echange fix server IP.
-* replacing 192.168.169.62 with an IP in your nework subnet that the client first connection will connect to.
-* replacing 192.168.169.52 with an IP in your nework subnet that the client second connection will connect to.
-* replacing 01001 with your firm code.
-* replacing 31001 with your exchange fix port.
-* edit the file named re_install.sh replacing the below line with valid IP range in your system:
+* Replaciing 192.168.169.7 with the exchange fix server IP.
+* Replacing 192.168.169.62 with an IP in your nework subnet that the client first connection will connect to.
+* Replacing 192.168.169.52 with an IP in your network subnet that the client second connection will connect to.
+* Replacing 01001 with your firm code.
+* Replacing 31001 with your exchange fix port.
+* Edit the file named re_install.sh replacing the below line with valid IP range in your system:
 
 sudo microk8s.enable metallb 192.168.169.50-192.168.169.99 
 
