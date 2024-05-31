@@ -665,6 +665,7 @@ items:
       TargetCompID=CASE2
       SenderCompID=01001
       ResetOnLogon=Y
+      ResetOnLogout=Y
       ReconnectInterval=10
   kind: ConfigMap
   metadata:
